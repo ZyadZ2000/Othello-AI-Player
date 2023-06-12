@@ -35,6 +35,40 @@ public class Game_Settings {
         board[4][4] = 2;
         return board;
     }
+	  public static Point UpdateMove(int[][] before , int[][] after){
+        for (int row = 0; row < BOARD_LENGTH; row++) {
+            for (int col = 0; col < BOARD_WIDTH; col++) {
+                if(before[row][col]== EMPTY && after[row][col]!= EMPTY){
+                    return new Point(row,col);
+                }
+            }
+        }
+        return null;
+    }
+   
+    public static int Find_Winner(int[][] board){
+        if(!isGameFinished(board))
+            //not finish yet
+            return -1;
+        else{
+            //find the winner
+            int player1_points = CountPlayerPoints(board,PLAYER_ONE);
+            int player2_points = CountPlayerPoints(board,PLAYER_TWO);
+            
+            if(player1_points < player2_points){
+                //p2 wins
+                return PLAYER_TWO;
+            }
+            else if(player1_points > player2_points){
+                //p1 wins
+                return PLAYER_ONE;
+            }
+            else{
+                //tie
+                return EMPTY;
+            }
+        }
+    }
 
    
 
