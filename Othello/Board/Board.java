@@ -264,10 +264,51 @@ public class Board extends JPanel implements Game_Interface {
 
 	// update highlights on possible moves and scores
 	public void updateBoardInfo() {
+
+		int p1score = 0;
+		int p2score = 0;
+
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (board[i][j] == 1)
+					p1score++;
+				if (board[i][j] == 2)
+					p2score++;
+
+				if (Game_Settings.Valid_Move(board, turn, i, j)) {
+					cells[i][j].highlight = 1;
+				} else {
+					cells[i][j].highlight = 0;
+				}
+			}
+		}
+
+		score1.setText(player1.playerName() + " : " + p1score);
+		score2.setText(player2.playerName() + " : " + p2score);
+	}
+
+	public void updateTotalScore() {
+		tscore1.setText(player1.playerName() + " : " + totalscore1);
+		tscore2.setText(player2.playerName() + " : " + totalscore2);
 	}
 
 	@Override
 	public void handleClick(int i, int j) {
+		if (awaitForClick && Game_Settings.Valid_Move(board, turn, i, j)) {
+
+			// update board
+			board = Game_Settings.update_Board(board, new Point(i, j), turn);
+
+			// advance turn
+			turn = (turn == 1) ? 2 : 1;
+
+			repaint();
+
+			awaitForClick = false;
+
+			// callback
+			manageTurn();
+		}
 	}
 
 	public void handleAI(Player_Info ai) {
