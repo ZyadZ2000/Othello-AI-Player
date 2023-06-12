@@ -147,9 +147,119 @@ public class Board extends JPanel implements Game_Interface {
 	}
 
 	public void manageTurn() {
+		if (Game_Settings.ValidMoveExist(board, 1) || Game_Settings.ValidMoveExist(board, 2)) {
+			updateBoardInfo();
+			if (turn == 1) {
+				if (Game_Settings.ValidMoveExist(board, 1)) {
+					if (player1.isUserPlayer()) {
+						awaitForClick = true;
+						// after click this function should be call backed
+					} else {
+						player1HandlerTimer.start();
+					}
+				} else {
+					// forfeit this move and pass the turn
+					turn = 2;
+					manageTurn();
+				}
+			} else {
+				if (Game_Settings.ValidMoveExist(board, 2)) {
+					if (player2.isUserPlayer()) {
+						awaitForClick = true;
+						// after click this function should be call backed
+					} else {
+						player2HandlerTimer.start();
+					}
+				} else {
+					turn = 1;
+					manageTurn();
+				}
+			}
+		} else {
+			// Othello.game finished
+			System.out.println("Game Finished !");
+			int winner = Game_Settings.Find_Winner(board);
+			if (winner == 1)
+				totalscore1++;
+			else if (winner == 2)
+				totalscore2++;
+			updateTotalScore();
+
+		}
 	}
 
 	public void resetBoard() {
+		board = new int[8][8];
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				board[i][j] = 0;
+			}
+		}
+		// initial board state
+		setGameScore(3, 3, 2);
+		setGameScore(3, 4, 1);
+		setGameScore(4, 3, 1);
+		setGameScore(4, 4, 2);
+		setGameScore(0, 0, 0);
+		setGameScore(0, 1, 0);
+		setGameScore(0, 2, 0);
+		setGameScore(0, 3, 0);
+		setGameScore(0, 4, 0);
+		setGameScore(0, 5, 0);
+		setGameScore(0, 6, 0);
+		setGameScore(0, 7, 0);
+		setGameScore(1, 0, 0);
+		setGameScore(1, 1, 0);
+		setGameScore(1, 2, 0);
+		setGameScore(1, 3, 0);
+		setGameScore(1, 4, 0);
+		setGameScore(1, 5, 0);
+		setGameScore(1, 6, 0);
+		setGameScore(1, 7, 0);
+		setGameScore(2, 0, 0);
+		setGameScore(2, 1, 0);
+		setGameScore(2, 2, 0);
+		setGameScore(2, 3, 0);
+		setGameScore(2, 4, 0);
+		setGameScore(2, 5, 0);
+		setGameScore(2, 6, 0);
+		setGameScore(2, 7, 0);
+		setGameScore(3, 0, 0);
+		setGameScore(3, 1, 0);
+		setGameScore(3, 2, 0);
+		setGameScore(3, 5, 0);
+		setGameScore(3, 6, 0);
+		setGameScore(3, 7, 0);
+		setGameScore(4, 0, 0);
+		setGameScore(4, 1, 0);
+		setGameScore(4, 2, 0);
+		setGameScore(4, 5, 0);
+		setGameScore(4, 6, 0);
+		setGameScore(4, 7, 0);
+		setGameScore(5, 0, 0);
+		setGameScore(5, 1, 0);
+		setGameScore(5, 2, 0);
+		setGameScore(5, 3, 0);
+		setGameScore(5, 4, 0);
+		setGameScore(5, 5, 0);
+		setGameScore(5, 6, 0);
+		setGameScore(5, 7, 0);
+		setGameScore(6, 0, 0);
+		setGameScore(6, 1, 0);
+		setGameScore(6, 2, 0);
+		setGameScore(6, 3, 0);
+		setGameScore(6, 4, 0);
+		setGameScore(6, 5, 0);
+		setGameScore(6, 6, 0);
+		setGameScore(6, 7, 0);
+		setGameScore(7, 0, 0);
+		setGameScore(7, 1, 0);
+		setGameScore(7, 2, 0);
+		setGameScore(7, 3, 0);
+		setGameScore(7, 4, 0);
+		setGameScore(7, 5, 0);
+		setGameScore(7, 6, 0);
+		setGameScore(7, 7, 0);
 	}
 
 	// update highlights on possible moves and scores
