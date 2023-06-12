@@ -69,6 +69,49 @@ public class Game_Settings {
             }
         }
     }
+	
+    public static int CountAllPoints(int[][] board){
+        int counter = 0;
+        for (int row = 0; row < BOARD_LENGTH; row++) {
+            for (int col = 0; col < BOARD_WIDTH; col++) {
+                if(board[row][col] != EMPTY) counter++;
+            }
+        }
+        return counter;
+    }
+    
+
+    public static int CountPlayerPoints(int[][] board, int player){
+        int points = 0;
+        for (int row = 0; row < BOARD_LENGTH; row++) {
+            for (int col = 0; col < BOARD_WIDTH; col++) {
+                if(board[row][col] == player) points++;
+            }
+        }
+        return points;
+    }
+    
+
+
+    public static boolean ValidMoveExist(int[][] board, int player){ 
+        return getValidMoves(board,player).size() > EMPTY;
+    }
+	
+
+    public static ArrayList<Point> getValidMoves(int[][] board, int player){
+        ArrayList<Point> Valids = new ArrayList<>();
+        
+        boolean result;
+        for (int row = 0; row < BOARD_LENGTH; row++) {
+            for (int col = 0; col < BOARD_WIDTH; col++) {
+                result = Valid_Move(board,player,row,col);
+                if(result){
+                    Valids.add(new Point(row,col));
+                }
+            }
+        }
+        return Valids;
+    }
 
    
 
