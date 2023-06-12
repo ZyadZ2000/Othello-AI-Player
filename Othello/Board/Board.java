@@ -312,6 +312,19 @@ public class Board extends JPanel implements Game_Interface {
 	}
 
 	public void handleAI(Player_Info ai) {
+		Point aiPlayPoint = ai.play(board);
+		int i = aiPlayPoint.x;
+		int j = aiPlayPoint.y;
+		if (!Game_Settings.Valid_Move(board, ai.value, i, j))
+			System.err.println("FATAL : AI Invalid Move !");
+
+		// update board
+		board = Game_Settings.update_Board(board, aiPlayPoint, turn);
+
+		// advance turn
+		turn = (turn == 1) ? 2 : 1;
+
+		repaint();
 	}
 
 }
