@@ -542,6 +542,45 @@ public class Game_Settings {
 
         return Non_flipped;
     }
+	
+	
+	public static ArrayList<Point> frontier_squares(int[][] board, int player){
+        int Enemy;
+        if(player == PLAYER_ONE){
+            Enemy= PLAYER_TWO;
+        }
+        else{
+            Enemy= PLAYER_ONE;
+        }
+        ArrayList<Point> Squares = new ArrayList<>();
+        for (int row = 0; row < BOARD_LENGTH; row++) {
+            for (int col = 0; col < BOARD_WIDTH; col++) {
+                if(board[row][col]==Enemy){
+                    ArrayList<Point> Possible_squares = new ArrayList<>();
+                    if(row>0 && board[row-1][col]==EMPTY) Possible_squares.add(new Point(row-1,col));
+                    if(row<7 && board[row+1][col]==EMPTY) Possible_squares.add(new Point(row+1,col));
+                    if(col<7 && board[row][col+1]==EMPTY) Possible_squares.add(new Point(row,col+1));
+                    if(col>0 && board[row][col-1]==EMPTY) Possible_squares.add(new Point(row,col-1));
+                    if(row>0 && col>0 && board[row-1][col-1]==EMPTY) Possible_squares.add(new Point(row-1,col-1));
+                    if(row>0 && col<7 && board[row-1][col+1]==EMPTY) Possible_squares.add(new Point(row-1,col+1));
+                    if(row<7 && col>0 && board[row+1][col-1]==EMPTY) Possible_squares.add(new Point(row+1,col-1));
+                    if(row<7 && col<7 && board[row+1][col+1]==EMPTY) Possible_squares.add(new Point(row+1,col+1));
+                    for(Point pf : Possible_squares){
+                        boolean repeated = false;
+                        for(Point f : Squares){
+                            if(f.equals(pf)){
+                                repeated = true;
+                                break;
+                            }
+                        }
+                        if(!repeated) Squares.add(pf);
+                    }
+                }
+            }
+        }
+
+        return Squares;
+    }
 
 
    
