@@ -20,6 +20,21 @@ public class Game_Settings {
             return true;
         }
     }
+    
+    
+    public static int[][] getFirstState(){
+        int[][] board = new int[BOARD_LENGTH][BOARD_WIDTH];
+        for (int row = 0; row < BOARD_LENGTH; row++) {
+            for (int col = 0; col < BOARD_WIDTH; col++) {
+                board[row][col] = 0;
+            }
+        }
+        board[3][3] = 2;
+        board[3][4] = 1;
+        board[4][3] = 1;
+        board[4][4] = 2;
+        return board;
+    }
 
    
 
