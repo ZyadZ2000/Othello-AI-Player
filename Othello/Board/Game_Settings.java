@@ -365,6 +365,183 @@ public class Game_Settings {
         }
         return UpdatedBoard;
     }
+	 public static ArrayList<Point> get_NON_Flippped_Disks(int[][] board, int player, int ROW, int COL){
+
+        ArrayList<Point> Non_flipped = new ArrayList<>();
+
+        int Modified_Row , Modified_Col;
+        int Enemy;
+        if(player == PLAYER_ONE){
+            Enemy= PLAYER_TWO;
+        }
+        else{
+            Enemy= PLAYER_ONE;
+        }
+
+
+        for(int i=0;i<8;i++){
+            ArrayList<Point> TEMP = new ArrayList<>();
+            //UP
+            if(i == 0){
+                Modified_Row = ROW - 1;
+                Modified_Col = COL;
+                while(Modified_Row > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Row--;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+            //DOWN
+            else if(i == 1){
+                Modified_Row = ROW + 1;
+                Modified_Col = COL;
+                while(Modified_Row < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Row++;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+            //LEFT
+            else if(i == 2){
+                Modified_Row = ROW;
+                Modified_Col = COL - 1;
+                while(Modified_Col > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Col--;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+            //RIGHT
+            else if(i == 3){
+                Modified_Row = ROW;
+                Modified_Col = COL + 1;
+                while(Modified_Col < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Col++;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+            //UPPER LEFT
+            else if(i == 4){
+                Modified_Row = ROW - 1;
+                Modified_Col = COL - 1;
+                while(Modified_Row > 0 && Modified_Col > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Row--;
+                    Modified_Col--;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+            //UPPER RIGHT
+            else if(i == 5){
+                Modified_Row = ROW - 1;
+                Modified_Col = COL + 1;
+                while(Modified_Row > 0 && Modified_Col < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Row--;
+                    Modified_Col++;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+            //LOWER LEFT
+            else if(i == 6){
+                Modified_Row = ROW + 1;
+                Modified_Col = COL - 1;
+                while(Modified_Row < 7 && Modified_Col > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Row++;
+                    Modified_Col--;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+            //LOWER RIGHT
+            else if(i == 7){
+                Modified_Row = ROW + 1;
+                Modified_Col = COL + 1;
+                while(Modified_Row < 7 && Modified_Col < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    TEMP.add(new Point(Modified_Row,Modified_Col));
+                    Modified_Row++;
+                    Modified_Col++;
+                }
+                for(Point sd : TEMP){
+                    boolean redundant = false;
+                    for(Point stableDisc : Non_flipped){
+                        if(sd.equals(stableDisc)){
+                            redundant = true;
+                            break;
+                        }
+                    }
+                    if(!redundant) Non_flipped.add(sd);
+                }
+            }
+
+        }
+
+        return Non_flipped;
+    }
 
 
    
