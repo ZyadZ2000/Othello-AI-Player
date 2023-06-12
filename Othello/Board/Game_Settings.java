@@ -112,6 +112,133 @@ public class Game_Settings {
         }
         return Valids;
     }
+	  public static boolean Valid_Move(int[][] board, int player, int ROW, int COL){
+        boolean checking, Valid = false;
+        int Modified_Row , Modified_Col ;
+
+        int Enemy;
+        if(player == PLAYER_ONE){
+            Enemy= PLAYER_TWO;
+        }
+        else{
+            Enemy= PLAYER_ONE;
+        }
+
+        // If the cell is not empty
+        if(board[ROW][COL] != EMPTY) {
+            Valid = false;
+            return Valid;
+        }
+
+        //check the 8 directions
+        for (int i= 0;i< 8 ; i++){
+            checking = false;
+            if(i == 0){
+                Modified_Row = ROW - 1;
+                Modified_Col = COL;
+                while(Modified_Row > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Row--;
+                    checking = true;
+                }
+                if(Modified_Row >= 0 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+            else if(i == 1){
+                Modified_Row = ROW + 1;
+                Modified_Col = COL;
+                while(Modified_Row < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Row++;
+                    checking = true;
+                }
+                if(Modified_Row <= 7 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+            else if(i == 2){
+                Modified_Row = ROW;
+                Modified_Col = COL - 1;
+                while(Modified_Col > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Col--;
+                    checking = true;
+                }
+                if(Modified_Col >= 0 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+            else if(i == 3){
+                Modified_Row = ROW;
+                Modified_Col = COL + 1;
+
+                while(Modified_Col < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Col++;
+                    checking = true;
+                }
+                if(Modified_Col <= 7 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+            else if(i == 4){
+                Modified_Row = ROW - 1;
+                Modified_Col = COL - 1;
+                while(Modified_Row > 0 && Modified_Col > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Row--;
+                    Modified_Col--;
+                    checking = true;
+                }
+                if(Modified_Row >= 0 && Modified_Col >= 0 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+            else if(i == 5){
+                Modified_Row = ROW - 1;
+                Modified_Col = COL + 1;
+                while(Modified_Row > 0 && Modified_Col < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Row--;
+                    Modified_Col++;
+                    checking = true;
+                }
+                if(Modified_Row >= 0 && Modified_Col <= 7 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+            else if(i == 6){
+                Modified_Row = ROW + 1;
+                Modified_Col = COL - 1;
+                while(Modified_Row < 7 && Modified_Col > 0 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Row++;
+                    Modified_Col--;
+                    checking = true;
+                }
+                if(Modified_Row <= 7 && Modified_Col >= 0 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+            else if(i == 7){
+                Modified_Row = ROW + 1;
+                Modified_Col = COL + 1;
+                while(Modified_Row < 7 && Modified_Col < 7 && board[Modified_Row][Modified_Col] == Enemy){
+                    Modified_Row++;
+                    Modified_Col++;
+                    checking = true;
+                }
+                if(Modified_Row <= 7 && Modified_Col <= 7 && board[Modified_Row][Modified_Col] == player && checking == true){
+                    Valid = true;
+                    break;
+                }
+            }
+        }
+
+        return Valid;
+    }
+
 
    
 
