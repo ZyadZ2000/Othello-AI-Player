@@ -99,6 +99,22 @@ public class Main_Window extends JFrame {
 	}
 
 	private void createGameFrame() {
+		JFrame gameFrame = new JFrame();
+		gameFrame.add(board);
+		gameFrame.setTitle("Othello Game");
+		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameFrame.pack();
+		gameFrame.setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				Main_Window gameOptionsForm = new Main_Window();
+				gameOptionsForm.setVisible(true);
+			}
+		});
 	}
 
 }
