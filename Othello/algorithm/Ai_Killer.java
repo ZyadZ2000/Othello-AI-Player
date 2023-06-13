@@ -11,11 +11,9 @@ public class Ai_Killer extends Player_Info {
     private int depth;
     private Estimator estimator;
     private boolean isPlayer_1;
-
     private ArrayList<Point> Transtions_history;
     private int[][] arr2dLast;
     private boolean run_1 = true;
-
     OpeningBook openingBook;
     private boolean isValid = true;
 
